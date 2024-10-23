@@ -1,10 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const CutomButton = ({ title, onPress, style }) => {
+const CutomButton = (props) => {
   return (
-    <TouchableOpacity style={[styles.loginButton, style]} onPress={onPress}>
-      <Text style={styles.loginButtonText}>{title}</Text>
+    <TouchableOpacity
+      style={[styles.loginButton, props.style]}
+      onPress={props.onPress}
+    >
+      <MaterialCommunityIcons name={props.iconName} size={28} color="black" />
+      <Text style={styles.loginButtonText}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -29,11 +34,13 @@ export default function App() {
       <View style={styles.loginBtnBox}>
         <CutomButton
           title="이메일로 로그인"
+          iconName="email"
           onPress={hadleEmailLogin}
           style={styles.emailLogin}
         />
         <CutomButton
           title="구글로 계속하기"
+          iconName="google"
           onPress={hadleGoogleLogin}
           style={styles.googleLogin}
         />
@@ -71,6 +78,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   loginButton: {
+    flexDirection: "row",
+    gap: 5,
     borderWidth: 2,
     borderColor: "black",
     borderRadius: 10,
@@ -78,6 +87,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     width: "70%",
     alignItems: "center",
+    justifyContent: "center",
   },
   loginButtonText: {
     fontSize: 20,
